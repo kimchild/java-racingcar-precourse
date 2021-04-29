@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 public class CarName {
 
 	@Test
-	// @checkstyle:off
+		// @checkstyle:off
 	void 자동차_이름부여() {
-	// @checkstyle:on
+		// @checkstyle:on
 		/* given */
 		Car carName = new Car("pobi");
 
@@ -21,9 +21,9 @@ public class CarName {
 	}
 
 	@Test
-	// @checkstyle:off
+		// @checkstyle:off
 	void 자동차_리스트에_이름부여() {
-	// @checkstyle:on
+		// @checkstyle:on
 		/* given */
 		List<Car> carList = Arrays.asList(new Car("pobi"), new Car("crong"), new Car("heari"));
 
