@@ -17,6 +17,7 @@ public class Car {
 	public void move() {
 		this.move += 1;
 	}
+
 	public int getMove() {
 		return move;
 	}

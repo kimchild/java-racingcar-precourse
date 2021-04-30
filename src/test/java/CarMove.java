@@ -23,6 +23,7 @@ public class CarMove {
 		/* then */
 		assertThat(car.getMove()).isEqualTo(1);
 	}
+
 	@Test
 		// @checkstyle:off
 	void 자동차_전진2() {
