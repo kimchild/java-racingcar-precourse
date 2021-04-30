@@ -1,3 +1,5 @@
+package domain;
+
 public final class RandomNumber extends Number {
 	public static final int MIN_VALUE = 0;
 	public static final int MAX_VALUE = 9;
