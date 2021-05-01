@@ -15,6 +15,15 @@ public class UserInterfaceManager {
 
 	public void start(Scanner scan) {
 		this.reset();
+		final int count = userInput(scan);
+	}
+
+	private int userInput(Scanner scan) {
 		gameManager.setName(scan.next());
+		System.out.println("시도할 횟수는 몇회인가요?");
+		final int count = scan.nextInt();
+		gameManager.setCount(count);
+		gameManager.setUp();
+		return count;
 	}
 }
