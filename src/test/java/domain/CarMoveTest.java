@@ -30,7 +30,9 @@ public class CarMoveTest {
 		/* given */
 		final String names = "pobi";
 		final int count = 5;
-		GameManager gameManager = new GameManager(names, count);
+		GameManager gameManager = new GameManager();
+		gameManager.setName(names);
+		gameManager.setCount(count);
 
 
 		/* when */

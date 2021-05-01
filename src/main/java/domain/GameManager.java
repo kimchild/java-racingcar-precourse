@@ -7,13 +7,18 @@ import java.util.List;
 public class GameManager {
 	public static final String NAME_SPLIT = ",";
 	public static final String TIES_CAR_COMMA = ", ";
-	private final String name;
-	private final int count;
+	private String name;
+	private int count;
 
 	private List<Car> carList = new ArrayList<>();
 
-	public GameManager(String name, int count) {
+	public GameManager() {}
+
+	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setCount(int count) {
 		this.count = count;
 	}
 

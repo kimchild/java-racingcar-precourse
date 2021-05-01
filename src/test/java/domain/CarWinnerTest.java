@@ -16,7 +16,9 @@ public class CarWinnerTest {
 		/* given */
 		final String name = "pobi,crong,heari";
 		final int count = 5;
-		GameManager gameManager = new GameManager(name, count);
+		GameManager gameManager = new GameManager();
+		gameManager.setName(name);
+		gameManager.setCount(count);
 
 		/* when */
 		gameManager.setUp();
