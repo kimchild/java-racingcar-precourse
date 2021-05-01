@@ -1,10 +1,12 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameManager {
 	public static final String NAME_SPLIT = ",";
+	public static final String TIES_CAR_COMMA = ", ";
 	private final String name;
 	private final int count;
 
@@ -30,12 +32,31 @@ public class GameManager {
 	}
 
 	private void carActions() {
-		for (Car car : this.carList) {
+		for (Car car : this.getCarList()) {
 			car.action();
 		}
 	}
 
 	public List<Car> getCarList() {
 		return this.carList;
+	}
+
+	public String getWinners() {
+		Collections.sort(this.getCarList());
+		Car topWinner = this.getCarList().get(0);
+		StringBuilder names = new StringBuilder();
+
+		for (Car car : this.getCarList()) {
+			names.append(this.getTie(topWinner, car));
+		}
+
+		return names.substring(names.indexOf(TIES_CAR_COMMA) + 1);
+	}
+
+	private String getTie(Car topWinner, Car car) {
+		if (topWinner.getMove() == car.getMove()) {
+			return TIES_CAR_COMMA + car.getName();
+		}
+		return "";
 	}
 }

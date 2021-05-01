@@ -1,6 +1,6 @@
 package domain;
 
-public class Car {
+public class Car implements Comparable<Car> {
 	public static final int RULE_VALUE = 4;
 	public static final int ACTION_COUNT = 1;
 	private final String name;
@@ -49,5 +49,20 @@ public class Car {
 
 	public int getActionCount() {
 		return this.actionCount;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public int compareTo(Car car) {
+		if (this.getName().charAt(0) > car.getName().charAt(0)) {
+			return 0;
+		}
+		if (this.move > car.getMove()) {
+			return 1;
+		}
+		return -1;
 	}
 }
