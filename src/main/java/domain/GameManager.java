@@ -12,7 +12,8 @@ public class GameManager {
 
 	private List<Car> carList = new ArrayList<>();
 
-	public GameManager() {}
+	public GameManager() {
+	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -29,11 +30,7 @@ public class GameManager {
 	}
 
 	public void action() {
-		int index = 0;
-		do {
-			this.carActions();
-			index++;
-		} while (this.count > index);
+		this.carActions();
 	}
 
 	private void carActions() {

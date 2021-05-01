@@ -22,7 +22,11 @@ public class CarWinnerTest {
 
 		/* when */
 		gameManager.setUp();
-		gameManager.action();
+		int index = 0;
+		do {
+			gameManager.action();
+			index++;
+		} while (count > index);
 		String winners = gameManager.getWinners();
 
 		List<Car> carList = gameManager.getCarList();
@@ -37,6 +41,31 @@ public class CarWinnerTest {
 		System.out.println("winners : " + winners);
 		System.out.println("test names : " + names.substring(names.indexOf(GameManager.TIES_CAR_COMMA) + 1));
 		assertThat(winners).isEqualTo(names.substring(names.indexOf(GameManager.TIES_CAR_COMMA) + 1));
+	}
+
+	@Test
+		// @checkstyle:off
+	void 자동차_우승자검증() {
+		// @checkstyle:on
+		/* given */
+		final String name = "pobi,crong,heari";
+		final int count = 5;
+		GameManager gameManager = new GameManager();
+		gameManager.setName(name);
+		gameManager.setCount(count);
+
+		/* when */
+		gameManager.setUp();
+		int index = 0;
+		do {
+			gameManager.action();
+			index++;
+		} while (count > index);
+		gameManager.getWinners();
+		List<Car> cars = gameManager.getCarList();
+
+		/* then */
+		assertThat(cars.get(0).getMove()).isGreaterThan(cars.get(1).getMove() - 1);
 	}
 
 	private String getTie(Car topWinner, Car car) {

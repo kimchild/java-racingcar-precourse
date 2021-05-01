@@ -23,7 +23,7 @@ public class Car implements Comparable<Car> {
 		this.move += 1;
 	}
 
-	protected int getMove() {
+	public int getMove() {
 		return move;
 	}
 
@@ -57,10 +57,10 @@ public class Car implements Comparable<Car> {
 
 	@Override
 	public int compareTo(Car car) {
-		if (this.getName().charAt(0) > car.getName().charAt(0)) {
-			return 0;
+		if (this.move == car.getMove() && this.getName().charAt(0) > car.getName().charAt(0)) {
+			return 1;
 		}
-		if (this.move > car.getMove()) {
+		if (this.move < car.getMove()) {
 			return 1;
 		}
 		return -1;

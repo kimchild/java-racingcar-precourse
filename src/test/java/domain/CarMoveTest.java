@@ -37,7 +37,11 @@ public class CarMoveTest {
 
 		/* when */
 		gameManager.setUp();
-		gameManager.action();
+		int index = 0;
+		do {
+			gameManager.action();
+			index++;
+		} while (count > index);
 
 		/* then */
 		for (Car car : gameManager.getCarList()) {
