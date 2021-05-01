@@ -12,9 +12,9 @@ public class CarAddRandomTest {
 		// @checkstyle:on
 		/* given */
 		Car car = new Car("pobi");
-		car.random();
 
 		/* when */
+		car.random();
 
 		/* then */
 		assertThat(car.getRandomNumber()).isGreaterThan(0);
