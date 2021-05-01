@@ -1,6 +1,7 @@
 package domain;
 
 public class Car {
+	public static final int RULE_VALUE = 4;
 	private final String name;
 	private int move;
 	private int randomValue;
@@ -33,5 +34,9 @@ public class Car {
 
 	public int getRandomNumber() {
 		return randomValue;
+	}
+
+	public boolean isRule() {
+		return this.getRandomNumber() >= RULE_VALUE;
 	}
 }
