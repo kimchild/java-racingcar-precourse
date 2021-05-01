@@ -2,19 +2,17 @@ package domain;
 
 public class Car {
 	public static final int RULE_VALUE = 4;
+	public static final int ACTION_COUNT = 1;
 	private final String name;
 	private int move;
 	private int randomValue;
+	private int actionCount = 0;
 
 	public Car(String name) {
 		this.name = name;
 	}
 
 	public boolean isName() {
-		return isaBoolean();
-	}
-
-	private boolean isaBoolean() {
 		return null != name && !"".equals(name);
 	}
 
@@ -25,7 +23,7 @@ public class Car {
 		this.move += 1;
 	}
 
-	public int getMove() {
+	protected int getMove() {
 		return move;
 	}
 
@@ -35,11 +33,21 @@ public class Car {
 		this.randomValue = randomNumber.intValue();
 	}
 
-	public int getRandomNumber() {
+	protected int getRandomNumber() {
 		return randomValue;
 	}
 
 	public boolean isRule() {
 		return this.getRandomNumber() >= RULE_VALUE;
+	}
+
+	public void action() {
+		this.random();
+		this.move();
+		this.actionCount += ACTION_COUNT;
+	}
+
+	public int getActionCount() {
+		return this.actionCount;
 	}
 }
