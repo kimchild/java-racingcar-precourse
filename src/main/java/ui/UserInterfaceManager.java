@@ -40,7 +40,6 @@ public class UserInterfaceManager {
 		gameManager.setName(checkInputNames(scan));
 		System.out.println("시도할 횟수는 몇회인가요?");
 		final int count = checkInputNumber(scan);
-		gameManager.setCount(count);
 		gameManager.setUp();
 		return count;
 	}

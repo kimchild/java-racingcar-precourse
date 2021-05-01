@@ -20,9 +20,6 @@ public class GameManager {
 		this.name = name;
 	}
 
-	public void setCount(int count) {
-	}
-
 	public void setUp() {
 		for (String s : name.split(NAME_SPLIT)) {
 			this.carList.add(new Car(s));

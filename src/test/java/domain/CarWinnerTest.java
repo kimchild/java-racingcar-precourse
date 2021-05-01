@@ -18,7 +18,6 @@ public class CarWinnerTest {
 		final int count = 5;
 		GameManager gameManager = new GameManager();
 		gameManager.setName(name);
-		gameManager.setCount(count);
 
 		/* when */
 		gameManager.setUp();
@@ -52,7 +51,6 @@ public class CarWinnerTest {
 		final int count = 5;
 		GameManager gameManager = new GameManager();
 		gameManager.setName(name);
-		gameManager.setCount(count);
 
 		/* when */
 		gameManager.setUp();

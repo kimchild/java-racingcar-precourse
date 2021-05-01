@@ -32,8 +32,6 @@ public class CarMoveTest {
 		final int count = 5;
 		GameManager gameManager = new GameManager();
 		gameManager.setName(names);
-		gameManager.setCount(count);
-
 
 		/* when */
 		gameManager.setUp();
