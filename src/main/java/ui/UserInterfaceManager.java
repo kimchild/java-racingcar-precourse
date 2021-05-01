@@ -2,6 +2,7 @@ package ui;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import domain.Car;
 import domain.GameManager;
@@ -36,12 +37,36 @@ public class UserInterfaceManager {
 	}
 
 	private int userInput(Scanner scan) {
-		gameManager.setName(scan.next());
+		gameManager.setName(checkInputNames(scan));
 		System.out.println("시도할 횟수는 몇회인가요?");
-		final int count = scan.nextInt();
+		final int count = checkInputNumber(scan);
 		gameManager.setCount(count);
 		gameManager.setUp();
 		return count;
+	}
+
+	private int checkInputNumber(Scanner scan) {
+		final int max = GameManager.MAX_TRY_NUMBER;
+		String input = scan.next().trim();
+
+		while (input.length() == 0
+			|| !Pattern.compile(String.format("[1-9][0-9]?$|{%d}$", max)).matcher(input).find()) {
+			System.out.println("시도할 횟수는 1~99까지의 숫자만 가능합니다");
+			input = scan.next().trim();
+		}
+		return Integer.parseInt(input);
+	}
+
+	private String checkInputNames(Scanner scan) {
+		final int max = GameManager.MAX_NAME_SIZE + 1;
+		String input = scan.next().trim();
+
+		while (input.length() == 0
+			|| Pattern.compile(String.format("[a-z가-힣]{%d}(?:,|$)", max)).matcher(input).find()) {
+			System.out.println("이름은 5자리 까지만 가능합니다");
+			input = scan.next().trim();
+		}
+		return input;
 	}
 
 	private void movePrint(List<Car> carList) {

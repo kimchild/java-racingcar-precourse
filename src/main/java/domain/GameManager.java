@@ -7,8 +7,9 @@ import java.util.List;
 public class GameManager {
 	public static final String NAME_SPLIT = ",";
 	public static final String TIES_CAR_COMMA = ", ";
+	public static final int MAX_NAME_SIZE = 5;
+	public static final int MAX_TRY_NUMBER = 99;
 	private String name;
-	private int count;
 
 	private List<Car> carList = new ArrayList<>();
 
@@ -20,7 +21,6 @@ public class GameManager {
 	}
 
 	public void setCount(int count) {
-		this.count = count;
 	}
 
 	public void setUp() {
