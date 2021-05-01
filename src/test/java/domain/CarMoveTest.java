@@ -15,29 +15,23 @@ public class CarMoveTest {
 
 	@Test
 		// @checkstyle:off
-	void 자동차_전진() {
+	void 자동차_전진유무판단_이동() {
 		// @checkstyle:on
 		/* given */
 
-		/* when */
-		car.move();
+		for (int i = 0; i < 100; i++) {
+			/* when */
+			car.random();
+			boolean isMove = car.getRandomNumber() >= Car.RULE_VALUE;
+			car.move();
 
-		/* then */
-		assertThat(car.getMove()).isEqualTo(1);
-	}
-
-	@Test
-		// @checkstyle:off
-	void 자동차_전진2() {
-		// @checkstyle:on
-		/* given */
-
-		/* when */
-		car.move();
-		car.move();
-
-		/* then */
-		assertThat(car.getMove()).isEqualTo(2);
+			/* then */
+			if (isMove) {
+				assertThat(car.getMove() > 0).isTrue();
+				return;
+			}
+			assertThat(car.getMove() > 0).isFalse();
+		}
 	}
 
 }

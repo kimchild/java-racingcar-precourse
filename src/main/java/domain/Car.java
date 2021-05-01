@@ -19,6 +19,9 @@ public class Car {
 	}
 
 	public void move() {
+		if (!this.isRule()) {
+			return;
+		}
 		this.move += 1;
 	}
 
