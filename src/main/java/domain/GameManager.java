@@ -10,7 +10,6 @@ public class GameManager {
 	public static final String TIES_CAR_COMMA = ", ";
 	public static final int SUBSTRING_ADD_NUMBER = 1;
 	public static final int FIRST_WINNER_INDEX = 0;
-	private String name;
 	private CarNameList carNameList;
 
 	private List<Car> carList = new ArrayList<>();
