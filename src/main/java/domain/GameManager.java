@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class GameManager {
@@ -21,7 +23,7 @@ public class GameManager {
 	}
 
 	public void setUp() {
-		for (String s : name.split(NAME_SPLIT)) {
+		for (String s : new HashSet<>(Arrays.asList(name.split(NAME_SPLIT)))) {
 			this.carList.add(new Car(s));
 		}
 	}
