@@ -2,10 +2,12 @@ package ui;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import domain.Car;
 import domain.GameManager;
+import wrapper.RepetitionCarName;
+import wrapper.RepetitionNumber;
+import wrapper.RepetitionRoundNumber;
 
 public class UserInterfaceManager implements UserInterfaceConstants {
 
@@ -18,25 +20,27 @@ public class UserInterfaceManager implements UserInterfaceConstants {
 
 	public void start(Scanner scan) throws InterruptedException {
 		this.reset();
-		final int count = userInput(scan);
-		userOutput(count);
+		outputUser(inputUser(scan));
 	}
 
-	private void userOutput(int count) throws InterruptedException {
-		int index = 0;
+	private void outputUser(int count) throws InterruptedException {
+		RepetitionRoundNumber repetitionRoundNumber = new RepetitionRoundNumber();
 		do {
-			gameManager.action();
-			System.out.println(ACTION_RESULT_MESSAGE);
-
-			this.movePrint(gameManager.getCarList());
-			index++;
+			outputAction();
+			repetitionRoundNumber.increase();
 			Thread.sleep(RACING_WAIT_SPEED_MILLIS);
-		} while (count > index);
+		} while (repetitionRoundNumber.isRepeat(count));
 
 		System.out.println(gameManager.getWinners() + FINAL_WINNER_MESSAGE);
 	}
 
-	private int userInput(Scanner scan) {
+	private void outputAction() {
+		gameManager.action();
+		System.out.println(ACTION_RESULT_MESSAGE);
+		this.movePrint(gameManager.getCarList());
+	}
+
+	private int inputUser(Scanner scan) {
 		gameManager.setName(checkInputNames(scan));
 		System.out.println(RACE_REPEAT_MESSAGE);
 		gameManager.setUpNames();
@@ -44,27 +48,23 @@ public class UserInterfaceManager implements UserInterfaceConstants {
 	}
 
 	private int getRepetitionNumberUserInput(Scanner scan) {
-		final int max = GameManager.MAX_TRY_NUMBER;
-		String input = scan.next().trim();
+		RepetitionNumber repetitionNumber = new RepetitionNumber(scan.next());
 
-		while (input.length() == USER_INPUT_CHECK_SIZE
-			|| !Pattern.compile(String.format(REGEX_REPEAT_REQUEST_NUMBER, max)).matcher(input).find()) {
+		while (repetitionNumber.isRepeat()) {
 			System.out.println(REPEAT_REQUEST_NUMBER_MESSAGE);
-			input = scan.next().trim();
+			repetitionNumber.setValue(scan.next());
 		}
-		return Integer.parseInt(input);
+		return repetitionNumber.intValue();
 	}
 
 	private String checkInputNames(Scanner scan) {
-		String input = scan.next().trim();
+		RepetitionCarName repetitionCarName = new RepetitionCarName(scan.next());
 
-		while (input.length() == USER_INPUT_CHECK_SIZE
-			|| Pattern.compile(String.format(REGEX_CAR_NAME_LIMIT, GameManager.MAX_NAME_OVER_SIZE))
-						.matcher(input).find()) {
+		while (repetitionCarName.isRepeat()) {
 			System.out.println(CAR_NAME_LIMIT_MESSAGE);
-			input = scan.next().trim();
+			repetitionCarName.setValue(scan.next());
 		}
-		return input;
+		return repetitionCarName.toString();
 	}
 
 	private void movePrint(List<Car> carList) {

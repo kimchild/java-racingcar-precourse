@@ -9,9 +9,6 @@ import java.util.List;
 public class GameManager {
 	public static final String NAME_SPLIT = ",";
 	public static final String TIES_CAR_COMMA = ", ";
-	public static final int MAX_NAME_SIZE = 5;
-	public static final int MAX_NAME_OVER_SIZE = MAX_NAME_SIZE + 1;
-	public static final int MAX_TRY_NUMBER = 99;
 	public static final int SUBSTRING_ADD_NUMBER = 1;
 	public static final int FIRST_WINNER_INDEX = 0;
 	private String name;
