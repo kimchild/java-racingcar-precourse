@@ -7,13 +7,13 @@ import java.util.regex.Pattern;
 import domain.Car;
 import domain.GameManager;
 
-public class UserInterfaceManager {
+public class UserInterfaceManager implements UserInterfaceConstants {
 
 	GameManager gameManager = new GameManager();
 
 	private void reset() {
 		gameManager = new GameManager();
-		System.out.println("경주할 자동차 이름을입력하세요.(이름은 쉼표(,) 기준으로 구분)");
+		System.out.println(WRITE_NEW_RACE_CAR_NAMES_COMMA_PART_MESSAGE);
 	}
 
 	public void start(Scanner scan) throws InterruptedException {
@@ -26,43 +26,42 @@ public class UserInterfaceManager {
 		int index = 0;
 		do {
 			gameManager.action();
-			System.out.println("실행 결과");
+			System.out.println(ACTION_RESULT_MESSAGE);
 
 			this.movePrint(gameManager.getCarList());
 			index++;
-			Thread.sleep(2000);
+			Thread.sleep(RACING_WAIT_SPEED_MILLIS);
 		} while (count > index);
 
-		System.out.println(gameManager.getWinners() + "가 최종 우승했습니다.");
+		System.out.println(gameManager.getWinners() + FINAL_WINNER_MESSAGE);
 	}
 
 	private int userInput(Scanner scan) {
 		gameManager.setName(checkInputNames(scan));
-		System.out.println("시도할 횟수는 몇회인가요?");
-		final int count = checkInputNumber(scan);
-		gameManager.setUp();
-		return count;
+		System.out.println(RACE_REPEAT_MESSAGE);
+		gameManager.setUpNames();
+		return getRepetitionNumberUserInput(scan);
 	}
 
-	private int checkInputNumber(Scanner scan) {
+	private int getRepetitionNumberUserInput(Scanner scan) {
 		final int max = GameManager.MAX_TRY_NUMBER;
 		String input = scan.next().trim();
 
-		while (input.length() == 0
-			|| !Pattern.compile(String.format("[1-9][0-9]?$|{%d}$", max)).matcher(input).find()) {
-			System.out.println("시도할 횟수는 1~99까지의 숫자만 가능합니다");
+		while (input.length() == USER_INPUT_CHECK_SIZE
+			|| !Pattern.compile(String.format(REGEX_REPEAT_REQUEST_NUMBER, max)).matcher(input).find()) {
+			System.out.println(REPEAT_REQUEST_NUMBER_MESSAGE);
 			input = scan.next().trim();
 		}
 		return Integer.parseInt(input);
 	}
 
 	private String checkInputNames(Scanner scan) {
-		final int max = GameManager.MAX_NAME_SIZE + 1;
 		String input = scan.next().trim();
 
-		while (input.length() == 0
-			|| Pattern.compile(String.format("[a-z가-힣]{%d}(?:,|$)", max)).matcher(input).find()) {
-			System.out.println("이름은 5자리 까지만 가능합니다");
+		while (input.length() == USER_INPUT_CHECK_SIZE
+			|| Pattern.compile(String.format(REGEX_CAR_NAME_LIMIT, GameManager.MAX_NAME_OVER_SIZE))
+						.matcher(input).find()) {
+			System.out.println(CAR_NAME_LIMIT_MESSAGE);
 			input = scan.next().trim();
 		}
 		return input;
@@ -73,7 +72,7 @@ public class UserInterfaceManager {
 		for (Car car : carList) {
 			sb = new StringBuilder();
 			sb.append(car.getName());
-			sb.append(" : ");
+			sb.append(CAR_START_LINE_OUTPUT_MESSAGE);
 			sb.append(this.getMovement(car.getMove()));
 			System.out.println(sb);
 		}
@@ -82,7 +81,7 @@ public class UserInterfaceManager {
 	private String getMovement(int move) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < move; i++) {
-			sb.append("-");
+			sb.append(ONE_ROUND_MESSAGE);
 		}
 		return sb.toString();
 	}

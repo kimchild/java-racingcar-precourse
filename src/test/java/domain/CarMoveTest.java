@@ -34,7 +34,7 @@ public class CarMoveTest {
 		gameManager.setName(names);
 
 		/* when */
-		gameManager.setUp();
+		gameManager.setUpNames();
 		int index = 0;
 		do {
 			gameManager.action();

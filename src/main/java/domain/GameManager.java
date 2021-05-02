@@ -10,7 +10,10 @@ public class GameManager {
 	public static final String NAME_SPLIT = ",";
 	public static final String TIES_CAR_COMMA = ", ";
 	public static final int MAX_NAME_SIZE = 5;
+	public static final int MAX_NAME_OVER_SIZE = MAX_NAME_SIZE + 1;
 	public static final int MAX_TRY_NUMBER = 99;
+	public static final int SUBSTRING_ADD_NUMBER = 1;
+	public static final int FIRST_WINNER_INDEX = 0;
 	private String name;
 
 	private List<Car> carList = new ArrayList<>();
@@ -22,7 +25,7 @@ public class GameManager {
 		this.name = name;
 	}
 
-	public void setUp() {
+	public void setUpNames() {
 		for (String s : new HashSet<>(Arrays.asList(name.split(NAME_SPLIT)))) {
 			this.carList.add(new Car(s));
 		}
@@ -44,14 +47,18 @@ public class GameManager {
 
 	public String getWinners() {
 		Collections.sort(this.getCarList());
-		Car topWinner = this.getCarList().get(0);
+		Car topWinner = this.getCarList().get(FIRST_WINNER_INDEX);
 		StringBuilder names = new StringBuilder();
 
 		for (Car car : this.getCarList()) {
 			names.append(this.getTie(topWinner, car));
 		}
 
-		return names.substring(names.indexOf(TIES_CAR_COMMA) + 1);
+		return getAllWinner(names);
+	}
+
+	private String getAllWinner(StringBuilder names) {
+		return names.substring(names.indexOf(TIES_CAR_COMMA) + SUBSTRING_ADD_NUMBER);
 	}
 
 	private String getTie(Car topWinner, Car car) {

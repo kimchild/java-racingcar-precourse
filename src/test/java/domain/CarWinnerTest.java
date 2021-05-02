@@ -20,7 +20,7 @@ public class CarWinnerTest {
 		gameManager.setName(name);
 
 		/* when */
-		gameManager.setUp();
+		gameManager.setUpNames();
 		int index = 0;
 		do {
 			gameManager.action();
@@ -53,7 +53,7 @@ public class CarWinnerTest {
 		gameManager.setName(name);
 
 		/* when */
-		gameManager.setUp();
+		gameManager.setUpNames();
 		int index = 0;
 		do {
 			gameManager.action();

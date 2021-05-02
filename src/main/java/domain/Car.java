@@ -3,6 +3,9 @@ package domain;
 public class Car implements Comparable<Car> {
 	public static final int RULE_VALUE = 4;
 	public static final int ACTION_COUNT = 1;
+	public static final int COMPARE_RESULT_NUMBER = 1;
+	public static final int MOVE_NUMBER = 1;
+	public static final int NAME_ASC_INDEX = 0;
 	private final String name;
 	private int move;
 	private int randomValue;
@@ -20,7 +23,7 @@ public class Car implements Comparable<Car> {
 		if (!this.isRule()) {
 			return;
 		}
-		this.move += 1;
+		this.move += MOVE_NUMBER;
 	}
 
 	public int getMove() {
@@ -57,12 +60,16 @@ public class Car implements Comparable<Car> {
 
 	@Override
 	public int compareTo(Car car) {
-		if (this.move == car.getMove() && this.getName().charAt(0) > car.getName().charAt(0)) {
-			return 1;
+		if (this.move == car.getMove() && isNameAsc(car)) {
+			return COMPARE_RESULT_NUMBER;
 		}
 		if (this.move < car.getMove()) {
-			return 1;
+			return COMPARE_RESULT_NUMBER;
 		}
 		return -1;
+	}
+
+	private boolean isNameAsc(Car car) {
+		return this.getName().charAt(NAME_ASC_INDEX) > car.getName().charAt(NAME_ASC_INDEX);
 	}
 }
