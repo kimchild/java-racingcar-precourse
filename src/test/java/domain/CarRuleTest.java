@@ -15,9 +15,9 @@ public class CarRuleTest {
 
 		/* when */
 		car.random();
-		boolean isRule = car.getRandomNumber() >= Car.RULE_VALUE;
+		boolean isRound = car.getRandomNumber() >= Car.RACE_ROUND_STANDARD;
 
 		/* then */
-		assertThat(car.isRule()).isEqualTo(isRule);
+		assertThat(car.isRound()).isEqualTo(isRound);
 	}
 }

@@ -59,7 +59,7 @@ public class GameManager {
 	}
 
 	private String getTie(Car topWinner, Car car) {
-		if (topWinner.getMove() == car.getMove()) {
+		if (topWinner.getRound() == car.getRound()) {
 			return TIES_CAR_COMMA + car.getName();
 		}
 		return "";

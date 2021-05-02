@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class CarMoveTest {
+public class CarRoundTest {
 
 	@Test
 		// @checkstyle:off
@@ -16,10 +16,10 @@ public class CarMoveTest {
 			/* when */
 			Car car = new Car("pobi");
 			car.random();
-			car.move();
+			car.round();
 
 			/* then */
-			assertThat(car.getMove() > 0).isEqualTo(car.isRule());
+			assertThat(car.getRound() > 0).isEqualTo(car.isRound());
 		}
 	}
 

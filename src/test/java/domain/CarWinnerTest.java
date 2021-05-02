@@ -63,11 +63,11 @@ public class CarWinnerTest {
 		List<Car> cars = gameManager.getCarList();
 
 		/* then */
-		assertThat(cars.get(0).getMove()).isGreaterThan(cars.get(1).getMove() - 1);
+		assertThat(cars.get(0).getRound()).isGreaterThan(cars.get(1).getRound() - 1);
 	}
 
 	private String getTie(Car topWinner, Car car) {
-		if (topWinner.getMove() == car.getMove()) {
+		if (topWinner.getRound() == car.getRound()) {
 			return GameManager.TIES_CAR_COMMA + car.getName();
 		}
 		return "";

@@ -37,7 +37,7 @@ public class UserInterfaceManager implements UserInterfaceConstants {
 	private void outputAction() {
 		gameManager.action();
 		System.out.println(ACTION_RESULT_MESSAGE);
-		this.movePrint(gameManager.getCarList());
+		this.roundPrint(gameManager.getCarList());
 	}
 
 	private int inputUser(Scanner scan) {
@@ -67,20 +67,20 @@ public class UserInterfaceManager implements UserInterfaceConstants {
 		return repetitionCarName.toString();
 	}
 
-	private void movePrint(List<Car> carList) {
+	private void roundPrint(List<Car> carList) {
 		StringBuilder sb;
 		for (Car car : carList) {
 			sb = new StringBuilder();
 			sb.append(car.getName());
 			sb.append(CAR_START_LINE_OUTPUT_MESSAGE);
-			sb.append(this.getMovement(car.getMove()));
+			sb.append(this.getRoundment(car.getRound()));
 			System.out.println(sb);
 		}
 	}
 
-	private String getMovement(int move) {
+	private String getRoundment(int round) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < move; i++) {
+		for (int i = 0; i < round; i++) {
 			sb.append(ONE_ROUND_MESSAGE);
 		}
 		return sb.toString();

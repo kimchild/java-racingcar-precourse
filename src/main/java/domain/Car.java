@@ -1,21 +1,21 @@
 package domain;
 
 import wrapper.IncreaseActionCount;
-import wrapper.IncreaseCarMove;
+import wrapper.IncreaseCarRound;
 
 public class Car implements Comparable<Car> {
-	public static final int RULE_VALUE = 4;
+	public static final int RACE_ROUND_STANDARD = 4;
 	public static final int COMPARE_RESULT_NUMBER = 1;
 	public static final int NAME_ASC_INDEX = 0;
 	private final String name;
 
-	private IncreaseCarMove increaseCarMove;
+	private IncreaseCarRound increaseCarRound;
 	private RandomNumber randomNumber;
 	private IncreaseActionCount increaseActionCount;
 
 	public Car(String name) {
 		this.name = name;
-		increaseCarMove = new IncreaseCarMove();
+		increaseCarRound = new IncreaseCarRound();
 		randomNumber = new RandomNumber();
 		increaseActionCount = new IncreaseActionCount();
 	}
@@ -24,15 +24,15 @@ public class Car implements Comparable<Car> {
 		return null != name && !"".equals(name);
 	}
 
-	public void move() {
-		if (!this.isRule()) {
+	public void round() {
+		if (!this.isRound()) {
 			return;
 		}
-		this.increaseCarMove.increase();
+		this.increaseCarRound.increase();
 	}
 
-	public int getMove() {
-		return this.increaseCarMove.intValue();
+	public int getRound() {
+		return this.increaseCarRound.intValue();
 	}
 
 	public void random() {
@@ -43,13 +43,13 @@ public class Car implements Comparable<Car> {
 		return randomNumber.intValue();
 	}
 
-	public boolean isRule() {
-		return this.getRandomNumber() >= RULE_VALUE;
+	public boolean isRound() {
+		return this.getRandomNumber() >= RACE_ROUND_STANDARD;
 	}
 
 	public void action() {
 		this.random();
-		this.move();
+		this.round();
 		this.increaseActionCount.increase();
 	}
 
@@ -63,10 +63,10 @@ public class Car implements Comparable<Car> {
 
 	@Override
 	public int compareTo(Car car) {
-		if (this.increaseCarMove.intValue() == car.getMove() && isNameAsc(car)) {
+		if (this.increaseCarRound.intValue() == car.getRound() && isNameAsc(car)) {
 			return COMPARE_RESULT_NUMBER;
 		}
-		if (this.increaseCarMove.intValue() < car.getMove()) {
+		if (this.increaseCarRound.intValue() < car.getRound()) {
 			return COMPARE_RESULT_NUMBER;
 		}
 		return -1;

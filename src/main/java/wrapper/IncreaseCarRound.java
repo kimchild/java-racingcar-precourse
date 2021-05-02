@@ -1,10 +1,10 @@
 package wrapper;
 
-public class IncreaseCarMove extends Increase {
+public class IncreaseCarRound extends Increase {
 	public static final int INCREASE_VALUE = 1;
 	private int value;
 
-	public IncreaseCarMove() {
+	public IncreaseCarRound() {
 	}
 
 	@Override
