@@ -1,18 +1,23 @@
 package domain;
 
+import wrapper.IncreaseActionCount;
+import wrapper.IncreaseCarMove;
+
 public class Car implements Comparable<Car> {
 	public static final int RULE_VALUE = 4;
-	public static final int ACTION_COUNT = 1;
 	public static final int COMPARE_RESULT_NUMBER = 1;
-	public static final int MOVE_NUMBER = 1;
 	public static final int NAME_ASC_INDEX = 0;
 	private final String name;
-	private int move;
-	private int randomValue;
-	private int actionCount = 0;
+
+	private IncreaseCarMove increaseCarMove;
+	private RandomNumber randomNumber;
+	private IncreaseActionCount increaseActionCount;
 
 	public Car(String name) {
 		this.name = name;
+		increaseCarMove = new IncreaseCarMove();
+		randomNumber = new RandomNumber();
+		increaseActionCount = new IncreaseActionCount();
 	}
 
 	public boolean isName() {
@@ -23,21 +28,19 @@ public class Car implements Comparable<Car> {
 		if (!this.isRule()) {
 			return;
 		}
-		this.move += MOVE_NUMBER;
+		this.increaseCarMove.increase();
 	}
 
 	public int getMove() {
-		return move;
+		return this.increaseCarMove.intValue();
 	}
 
 	public void random() {
-		RandomNumber randomNumber = new RandomNumber();
 		randomNumber.random();
-		this.randomValue = randomNumber.intValue();
 	}
 
 	protected int getRandomNumber() {
-		return randomValue;
+		return randomNumber.intValue();
 	}
 
 	public boolean isRule() {
@@ -47,11 +50,11 @@ public class Car implements Comparable<Car> {
 	public void action() {
 		this.random();
 		this.move();
-		this.actionCount += ACTION_COUNT;
+		this.increaseActionCount.increase();
 	}
 
-	public int getActionCount() {
-		return this.actionCount;
+	public int getIncreaseActionCount() {
+		return this.increaseActionCount.intValue();
 	}
 
 	public String getName() {
@@ -60,10 +63,10 @@ public class Car implements Comparable<Car> {
 
 	@Override
 	public int compareTo(Car car) {
-		if (this.move == car.getMove() && isNameAsc(car)) {
+		if (this.increaseCarMove.intValue() == car.getMove() && isNameAsc(car)) {
 			return COMPARE_RESULT_NUMBER;
 		}
-		if (this.move < car.getMove()) {
+		if (this.increaseCarMove.intValue() < car.getMove()) {
 			return COMPARE_RESULT_NUMBER;
 		}
 		return -1;

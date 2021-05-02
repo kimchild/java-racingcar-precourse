@@ -43,7 +43,7 @@ public class CarMoveTest {
 
 		/* then */
 		for (Car car : gameManager.getCarList()) {
-			assertThat(car.getActionCount()).isEqualTo(count);
+			assertThat(car.getIncreaseActionCount()).isEqualTo(count);
 		}
 	}
 
