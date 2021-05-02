@@ -1,29 +1,30 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
+import wrapper.CarNameList;
+
 public class GameManager {
-	public static final String NAME_SPLIT = ",";
 	public static final String TIES_CAR_COMMA = ", ";
 	public static final int SUBSTRING_ADD_NUMBER = 1;
 	public static final int FIRST_WINNER_INDEX = 0;
 	private String name;
+	private CarNameList carNameList;
 
 	private List<Car> carList = new ArrayList<>();
 
 	public GameManager() {
+		this.carNameList = new CarNameList();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.carNameList.setValue(name);
 	}
 
 	public void setUpNames() {
-		for (String s : new HashSet<>(Arrays.asList(name.split(NAME_SPLIT)))) {
+		for (String s : this.carNameList.toArray()) {
 			this.carList.add(new Car(s));
 		}
 	}
